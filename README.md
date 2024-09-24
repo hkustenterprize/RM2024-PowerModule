@@ -16,6 +16,35 @@
 * 首先是如何识别底盘系统，对底盘电机建立功率模型，通过模型来预测底盘电机所消耗的功率
 * 其次是如何在指定的功率限制（例如裁判系统的功率限制）下约束和管理功率，而不影响底盘运动
 
+# 代码结构
+
+```shell
+├── Balance # 轮腿平衡功率控制代码及文档
+│   ├── AnalyticalPowerManager.cpp
+│   ├── AnalyticalPowerManager.hpp
+│   └── balancePower.pdf
+├── Mecanum_and_Omni	# 麦轮及全向轮底盘解算及功率控制代码
+│   ├── ChassisController.cpp
+│   ├── ChassisController.hpp
+|   ├── PowerController.cpp
+|   └── PowerController.hpp
+├── SteeringGear	# 舵轮底盘解算及功率控制代码
+│   ├── SGChassisControl.cpp
+│   ├── SGChassisControl.hpp
+│   ├── SGConfig.hpp
+│   ├── SGPowerLimitator.cpp
+│   ├── SGPowerLimitator.hpp
+│   └── SGUtil.hpp
+├── Utils # RLS及矩阵运算库
+│   ├── Matrix.hpp
+│   └── RLS.hpp
+├── images # README.md图片
+│   └── 一堆图片
+├── videos # README.md视频
+│   └── 一堆视频
+└── README.md
+```
+
 # 底盘系统
 
 我们的第一步是要识别底盘系统，如何不通过裁判系统和直接对电机作电流采样来预测电机所消耗的功率，以建立电机模型方便后续使用模型作约束。在本赛季中，我们并没有采用对电机母线电流直接采样的方案，而是通过有效的反馈（如电机反馈的力矩，转速），从而准确地预测底盘系统的功率消耗。
